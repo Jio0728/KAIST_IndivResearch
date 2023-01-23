@@ -28,9 +28,7 @@ import PIL.Image
 from collections import OrderedDict
 from tqdm import tqdm
 from torchvision.utils import save_image
-from torch_utils import misc
-from torch_utils.ops import conv2d_gradfix
-from tensorboardX import SummaryWriter
+# from tensorboardX import SummaryWriter
 
 CUR_DIR = os.path.abspath(__file__)
 TASK_DIR = os.path.dirname(CUR_DIR)
@@ -39,13 +37,15 @@ RESULT_DIR = os.path.join(TASK_DIR, "results")
 INPUT_IMGS_DIR = os.path.join(TASK_DIR, "input_imgs")
 
 sys.path.append(PRJ_DIR)
-summary = SummaryWriter()
+# summary = SummaryWriter()
 
 from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr
 from StyleNeRF.training.networks import Generator
 from StyleNeRF.renderer import Renderer
 import StyleNeRF.dnnlib
 import StyleNeRF.legacy
+from StyleNeRF.torch_utils import misc
+from StyleNeRF.torch_utils.ops import conv2d_gradfix
 from modules.utils import load_yaml
 from modules.optimizers import get_optimizer
 from modules.features import img2latents
@@ -159,8 +159,8 @@ for i in pbar:
             image = image.clamp(0, 255).to(torch.uint8)[0].cpu().numpy()
             video.append_data(image)
             # loss_list.append(loss) #loss 추가.
-            summary.add_scalar("total_loss", loss.item(), i) # TODO: WANDB로 수정
-            summary.add_scalar("c_loss", c_loss.item(), i)
+            # summary.add_scalar("total_loss", loss.item(), i) # TODO: WANDB로 수정
+            # summary.add_scalar("c_loss", c_loss.item(), i)
         
     if i % 100 == 0:
         save_image(torch.cat([initial_image, img_gen], -1).clamp(-1,1), f"{OUT_DIR}/{i}.png", normalize=True, range=(-1, 1))
