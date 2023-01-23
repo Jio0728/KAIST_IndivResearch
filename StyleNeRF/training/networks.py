@@ -8,11 +8,11 @@
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
-import os
-import sys
-CUR_DIR = os.path.abspath(__file__) 
-StyleNeRF_DIR = os.path.dirname(os.path.dirname(CUR_DIR))
-sys.path.append(StyleNeRF_DIR)
+# import os
+# import sys
+# CUR_DIR = os.path.abspath(__file__) 
+# StyleNeRF_DIR = os.path.dirname(os.path.dirname(CUR_DIR))
+# sys.path.append(StyleNeRF_DIR)
 
 from pickle import NONE
 from re import X
