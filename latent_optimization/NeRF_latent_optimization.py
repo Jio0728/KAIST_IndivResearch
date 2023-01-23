@@ -39,16 +39,18 @@ INPUT_IMGS_DIR = os.path.join(TASK_DIR, "input_imgs")
 sys.path.append(PRJ_DIR)
 # summary = SummaryWriter()
 
-from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr
+# from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr
 from StyleNeRF.training.networks import Generator
 from StyleNeRF.renderer import Renderer
 import StyleNeRF.dnnlib
 import StyleNeRF.legacy
 from StyleNeRF.torch_utils import misc
 from StyleNeRF.torch_utils.ops import conv2d_gradfix
-from modules.utils import load_yaml
+from modules.utils import load_yaml, get_lr
 from modules.optimizers import get_optimizer
 from modules.features import img2latents
+from modules.losses import CLIPLoss, IDLoss
+
 
 # ---- load config -----
 config_path = f"{TASK_DIR}/config/NeRF_latent_optimization.yml"
