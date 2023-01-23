@@ -22,8 +22,6 @@ import torch.nn.functional as F
 
 import torch.optim as optimㅌ
 import click
-import dnnlib
-import legacy
 import copy
 import PIL.Image
 
@@ -46,6 +44,8 @@ summary = SummaryWriter()
 from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr
 from StyleNeRF.training.networks import Generator
 from StyleNeRF.renderer import Renderer
+import StyleNeRF.dnnlib
+import StyleNeRF.legacy
 from modules.utils import load_yaml
 from modules.optimizers import get_optimizer
 from modules.features import img2latents
@@ -93,8 +93,8 @@ if SAVE_VIDEO:
 if os.path.isdir(NETWORK_PKL):
     network_pkl = sorted(glob.glob(NETWORK_PKL + '/*.pkl'))[-1]
 print('Loading networks from "%s"...' % network_pkl)
-with dnnlib.util.open_url(network_pkl) as fp:
-    G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device) # type: ignore
+with StyleNeRF.dnnlib.util.open_url(network_pkl) as fp:
+    G = StyleNeRF.legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device) # type: ignore
 G = copy.deepcopy(G).eval().requires_grad_(False).to(device) # type: ignore
 
 with torch.no_grad():
