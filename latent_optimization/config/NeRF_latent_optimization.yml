@@ -1,0 +1,24 @@
+GPU: 0
+WANDB: False
+DEBIG: True
+
+SETTING:
+  seed: 42
+  save_video: True # True or False
+  img_fname : # input 이미지 폴더에 있는 이미지 파일 이름
+  
+
+EXPERIMENT:
+  network_pkl:  # styleNeRF의 pretrained pkl
+  e4e_pkl: #이미지에서 latent vector 추출한 encoder
+  optimizer: Adam
+  text: "blue hair"
+  mode: edit # free or edit
+  latent_mode: random # random or from_image
+  num_steps: 30
+  lr_init: 0.1
+  lr_rampup: 0.05
+  l2_lambda: 0.008
+  id_lambda: 0.000
+  trunc: 0.7
+  
