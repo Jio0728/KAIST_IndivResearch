@@ -39,7 +39,7 @@ INPUT_IMGS_DIR = os.path.join(TASK_DIR, "input_imgs")
 sys.path.append(PRJ_DIR)
 # summary = SummaryWriter()
 
-# from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr
+# from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr <- 이거 dnnlib 임포트 에러 때문에 그냥 커스텀 폴더 만들어서 새로 정의함.
 from StyleNeRF.training.networks import Generator
 from StyleNeRF.renderer import Renderer
 import StyleNeRF.dnnlib

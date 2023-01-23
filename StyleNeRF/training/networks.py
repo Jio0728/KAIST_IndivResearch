@@ -8,6 +8,12 @@
 # distribution of this software and related documentation without an express
 # license agreement from NVIDIA CORPORATION is strictly prohibited.
 
+import os
+import sys
+CUR_DIR = os.path.abspath(__file__) 
+StyleNeRF_DIR = os.path.dirname(os.path.dirname(CUR_DIR))
+sys.path.append(StyleNeRF_DIR)
+
 from pickle import NONE
 from re import X
 from sndhdr import whathdr
@@ -23,7 +29,7 @@ import torch
 import torch.nn.functional as F
 from torch.overrides import is_tensor_method_or_property
 from einops import repeat
-from dnnlib import camera, util, geometry
+from dnnlib import camera, util, geometry #!DEBUG 230123 import error 수정
 from torch_utils import misc
 from torch_utils import persistence
 from torch_utils.ops import conv2d_resample
