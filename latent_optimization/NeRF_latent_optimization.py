@@ -40,7 +40,7 @@ PRJ_DIR = os.path.dirname(TASK_DIR)
 RESULT_DIR = os.path.join(TASK_DIR, "results")
 INPUT_IMGS_DIR = os.path.join(TASK_DIR, "input_imgs")
 
-sys.append(PRJ_DIR)
+sys.path.append(PRJ_DIR)
 summary = SummaryWriter()
 
 from StyleNeRF.apps.text_guide import CLIPLoss, IDLoss, get_lr
