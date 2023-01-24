@@ -71,8 +71,8 @@ class StyleCLIPMapper(nn.Module):
 		G2 = Renderer(G2, None, program=None)
 	
         # ----- 여기까지 styleNeRF generator 받아오기. -----
-		self.decoder = G2
-		self.olddecoder = G
+		self.decoder = G2 # styleNeRF generator
+		self.olddecoder = G # styleGAN2 generator
 		self.face_pool = torch.nn.AdaptiveAvgPool2d((256, 256))
 		# Load weights if needed
 		self.load_weights() #styleNeRF 쓸 때는 self.decoder할 때 이미 pretrained 가져와서 load_weights 안씀.

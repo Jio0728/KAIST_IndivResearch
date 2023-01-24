@@ -237,15 +237,15 @@ class Coach:
 		elif self.opts.latents_train_path:
 			train_latents = torch.load(self.opts.latents_train_path)
 
-		else:
-			train_latents_z = torch.randn(self.opts.train_dataset_size, 512).cuda()
-			train_latents = []
-			for b in range(self.opts.train_dataset_size // self.opts.batch_size):
-				with torch.no_grad():
-					_, train_latents_b = self.net.decoder([train_latents_z[b * self.opts.batch_size: (b + 1) * self.opts.batch_size]],
-														  truncation=0.7, truncation_latent=self.net.latent_avg, return_latents=True)
-					train_latents.append(train_latents_b)
-			train_latents = torch.cat(train_latents)
+		# else: # 이게 styleGAN 이용해서 z -> w로 mapping 하는 건데, 난 이거 styleNeRF 이용할 거여서 안 씀.
+		# 	train_latents_z = torch.randn(self.opts.train_dataset_size, 512).cuda()
+		# 	train_latents = []
+		# 	for b in range(self.opts.train_dataset_size // self.opts.batch_size):
+		# 		with torch.no_grad():
+		# 			_, train_latents_b = self.net.decoder([train_latents_z[b * self.opts.batch_size: (b + 1) * self.opts.batch_size]],
+		# 												  truncation=0.7, truncation_latent=self.net.latent_avg, return_latents=True)
+		# 			train_latents.append(train_latents_b)
+		# 	train_latents = torch.cat(train_latents)
 
 
 		if self.opts.NeRFMapping:
@@ -261,15 +261,15 @@ class Coach:
 		elif self.opts.latents_test_path:
 			test_latents = torch.load(self.opts.latents_test_path)
 
-		else:
-			test_latents_z = torch.randn(self.opts.test_dataset_size, 512).cuda()
-			test_latents = []
-			for b in range(self.opts.test_dataset_size // self.opts.test_batch_size):
-				with torch.no_grad():
-					_, test_latents_b = self.net.decoder([test_latents_z[b * self.opts.test_batch_size: (b + 1) * self.opts.test_batch_size]],
-													  truncation=0.7, truncation_latent=self.net.latent_avg, return_latents=True)
-					test_latents.append(test_latents_b)
-			test_latents = torch.cat(test_latents)
+		# else:
+		# 	test_latents_z = torch.randn(self.opts.test_dataset_size, 512).cuda()
+		# 	test_latents = []
+		# 	for b in range(self.opts.test_dataset_size // self.opts.test_batch_size):
+		# 		with torch.no_grad():
+		# 			_, test_latents_b = self.net.decoder([test_latents_z[b * self.opts.test_batch_size: (b + 1) * self.opts.test_batch_size]],
+		# 											  truncation=0.7, truncation_latent=self.net.latent_avg, return_latents=True)
+		# 			test_latents.append(test_latents_b)
+		# 	test_latents = torch.cat(test_latents)
 
 		if self.opts.work_in_stylespace:
 			train_dataset_celeba = StyleSpaceLatentsDataset(latents=[l.cpu() for l in train_latents],
