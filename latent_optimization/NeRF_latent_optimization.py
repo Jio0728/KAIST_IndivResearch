@@ -30,8 +30,8 @@ from tqdm import tqdm
 from torchvision.utils import save_image
 # from tensorboardX import SummaryWriter
 
-CUR_DIR = os.path.abspath(__file__)
-TASK_DIR = os.path.dirname(CUR_DIR)
+CUR_PATH = os.path.abspath(__file__)
+TASK_DIR = os.path.dirname(CUR_PATH)
 PRJ_DIR = os.path.dirname(TASK_DIR)
 RESULT_DIR = os.path.join(TASK_DIR, "results")
 INPUT_IMGS_DIR = os.path.join(TASK_DIR, "input_imgs")
